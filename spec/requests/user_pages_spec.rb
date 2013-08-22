@@ -103,7 +103,7 @@ end
 
                 describe "toggling the button" do
                     before { click_button "Follow" }
-                    it { should have_selector('input', value: 'Unfollow') }
+                    it { should have_xpath("//input[@value='Unfollow']") }
                 end 
             end
 
@@ -127,7 +127,7 @@ end
 
                 describe "toggling the button" do
                     before { click_button "Unfollow" }
-                    it { should have_selector('input', value: 'Follow') }
+                    it { should have_xpath("//input[@value='Follow']") }
                 end             
             end
         end
