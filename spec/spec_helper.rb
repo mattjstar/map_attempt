@@ -49,6 +49,8 @@ Spork.prefork do
     # the seed, which is printed after each run.
     #     --seed 1234
     config.order = "random"
+
+    # Include the Capybara DSL for the sake of integration tests.
     config.include Capybara::DSL
   end
 end
