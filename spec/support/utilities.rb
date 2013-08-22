@@ -6,14 +6,17 @@ RSpec::Matchers.define :have_error_message do |message|
   end
 end
 
-def sign_in(user)
-	visit signin_path
-	fill_in "Email",    with: user.email
-  	fill_in "Password", with: user.password
-  	click_button "Sign in"
-  	# Sign in when not using Capybara 
-  	# (the put requests in authentication_pages_spec).
-  	# You can't have cookies in your test network (53:56 of video 9) so we 
-  	# manually add them here:
-  	cookies[:remember_token] = user.remember_token
+def sign_in(user, options={})
+  if options[:no_capybara]
+  # Sign in when not using Capybara.
+  remember_token = User.new_remember_token
+  cookies[:remember_token] = remember_token 
+  user.update_attribute(:remember_token, User.encrypt(remember_token))
+  else
+      visit signin_path
+      fill_in "Email",    with: user.email
+      fill_in "Password", with: user.password
+      click_button "Sign in"
+  end 
 end
+  
