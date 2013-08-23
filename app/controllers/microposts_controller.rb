@@ -9,6 +9,8 @@ class MicropostsController < ApplicationController
 			redirect_to root_path
 		else
 			@feed_items = []
+			@locations = Location.all
+      		@json = Location.all.to_gmaps4rails
 			render 'static_pages/home'
 		end
 	end
