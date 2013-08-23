@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
 
   def following? (other_user)
     #no need to use self. here, only necessary with things like the remember token
-    relationships.find_by_followed_id(other_user.id)
+    relationships.find_by(followed_id: other_user.id)
   end
 
   def follow! (other_user)
@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   end
 
   def unfollow!(other_user)
-    relationships.find_by_followed_id(other_user.id).destroy
+    relationships.find_by(followed_id: other_user.id).destroy
   end
 
   def feed

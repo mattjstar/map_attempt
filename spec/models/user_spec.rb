@@ -118,7 +118,7 @@ describe User do
 
 	describe "return value of authenticate method" do
 		before { @user.save }
-		let(:found_user) { User.find_by_email(@user.email) }
+		let(:found_user) { User.find_by(email: @user.email) }
 
 		describe "with valid password" do
 			it { should == found_user.authenticate(@user.password) }
@@ -165,7 +165,7 @@ describe User do
 			@user.destroy
 			microposts.should_not be_empty
 			microposts.each do |micropost|
-				Micropost.find_by_id(micropost.id).should be_nil
+				Micropost.find_by(id: micropost.id).should be_nil
 			end
 		end
 
